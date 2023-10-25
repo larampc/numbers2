@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'info.solidsoft.pitest' version '1.6.0'
 }
 
 group 'com.aor.numbers'
@@ -15,8 +16,13 @@ dependencies {
   testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
   testImplementation 'org.mockito:mockito-core:3.7.7'
   testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    compileOnly 'com.groupcdg:pitest-annotations:1.1.2'
 }
 
 test {
     useJUnitPlatform()
+}
+
+pitest {
+    junit5PluginVersion = '0.12'
 }

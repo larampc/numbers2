@@ -35,6 +35,34 @@ public class ListAggregatorTest {
     }
 
     @Test
+    public void max2() {
+        ListAggregator aggregator = new ListAggregator();
+        int max = aggregator.max(Arrays.asList(5,-2,4,5,5));
+
+        Assertions.assertEquals(5, max);
+
+    }
+    @Test
+    public void max3() {
+        ListAggregator aggregator = new ListAggregator();
+        int max = aggregator.max(Arrays.asList(1));
+        Assertions.assertEquals(1, max);
+    }
+
+    @Test
+    public void max4() {
+        ListAggregator aggregator = new ListAggregator();
+        int max = aggregator.max(Arrays.asList(1));
+        Assertions.assertEquals(1, max);
+    }
+
+    @Test
+    public void max5() {
+        ListAggregator aggregator = new ListAggregator();
+        int max = aggregator.max(Arrays.asList(0,0,0,0));
+        Assertions.assertEquals(0, max);
+    }
+    @Test
     public void max_bug_7263() {
         ListAggregator aggregator = new ListAggregator();
         int max = aggregator.max(Arrays.asList(-1,-4,-5));
@@ -54,7 +82,7 @@ public class ListAggregatorTest {
     public void distinct() {
 
         ListAggregator aggregator = new ListAggregator();
-        int distinct = aggregator.distinct(list, new ListDeduplicator());
+        int distinct = aggregator.distinct(list);
 
         Assertions.assertEquals(4, distinct);
     }
@@ -71,8 +99,8 @@ public class ListAggregatorTest {
         } */
         GenericListDeduplicator deduplicator = Mockito.mock(GenericListDeduplicator.class);
         Mockito.when(deduplicator.deduplicate(Mockito.anyList(), Mockito.any())).thenReturn(Arrays.asList(1, 2, 4));
-        ListAggregator aggregator = new ListAggregator();
-        int distinct = aggregator.distinct(Arrays.asList(1,2,4,2), deduplicator);
+        ListAggregator aggregator = new ListAggregator(deduplicator);
+        int distinct = aggregator.distinct(Arrays.asList(1,2,4,2));
 
         Assertions.assertEquals(3, distinct);
     }
